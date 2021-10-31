@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class = "goal_yen_counter">
+        <label for="goal_yen">目標金額:</label>
+        <input id="goal_yen" type="number" name="goal_yen" value="0"></input>
+        <button type="button" onclick="yenyen()">Submit</button>
+    </div>
+
+   
+    <script type="text/javascript">
+        function yenyen(){
+            var num = document.getElementById("goal_yen").value;
+            window.location.href = '500yen.html?' + num;
+        }
+    </script>
+
+</body>
+</html>
