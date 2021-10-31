@@ -109,7 +109,7 @@
             var yen = Number(predict());
             
             console.log(query);
-            query = Number(query) - yen;
+            query = (Number(query) - yen);
             console.log(query);
             
             window.location.href = '500yen.html?yen=' + query;
