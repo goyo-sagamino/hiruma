@@ -20,8 +20,19 @@
     <script type = "text/javascript">
 
         var query = location.search;
-        query = query.split("=")[1];//前のページで指定した目標金額
-
+        query = Number(query.split("=")[1]);//前のページで指定した目標金額
+        
+        document.write('<br \/>');
+        document.write('目標金額まで');
+        document.write(query); 
+        document.write('円です');
+        
+        document.write('<br \/>');
+        document.write(typeof(query));
+        document.write('<br \/>');
+        document.write(Object.prototype.toString(query));
+       
+        
         // More API functions here:
         // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
 
@@ -69,11 +80,11 @@
         var sum_yen=0
         
         function identification_yen(n){
-            a=0
-            b=0
-            if (n/4<1){
-                a=100
-                if (n%4==0 || n%4==1){
+            var a=0
+            var b=0
+            if (n/4<=1){
+                a=100;
+                if (n%4==1 || n%4==2){
                     b=5*a;
                 }
                 else{
@@ -81,9 +92,9 @@
                 }
             }
 
-            else if (n/4>1 && n/4<2){
+            else if (n/4>1 && n/4<=2){
                 a=10;
-                if (n%4==0 || n%4==1){
+                if (n%4==1 || n%4==2){
                     b=5*a;
                 }
                 else{
@@ -91,9 +102,9 @@
                 }
             }
             
-            else if (n/4>2 && n/4<3){
+            else if (n/4>2 && n/4<=3){
                 a=1;
-                if (n%4==0 || n%4==1){
+                if (n%4==1 || n%4==2){
                     b=5*a;
                 }
                 else{
@@ -105,12 +116,7 @@
 
         }
 
-        function OK(){
-            var yen = predict();
-            
-            console.log("yen" + yen);
-            window.location.href = '500yen.html?yen=' + yen; // + (query - yen);
-        }
+        
 
 
         // run the webcam image through the image model;
@@ -118,18 +124,46 @@
             const prediction = await model.predict(webcam.canvas);
             var yen = 0;
             for (let i = 0; i < maxPredictions; i++) {
+                j=i+1
                 if(prediction[i].probability.toFixed(2)>0.9){
-                    yen = identification_yen(i);
+                    yen = identification_yen(j);
+                    
                 }
             }
-
+            
             for (let i = 0; i < maxPredictions; i++) {
                 const classPrediction =
                     prediction[i].className + ": " + prediction[i].probability.toFixed(2);
                 labelContainer.childNodes[i].innerHTML = classPrediction;
             }
+
+      
             return yen
         }
+        
+        function OK(){
+            var c=string(predict())
+            var d=parseInt(c)
+            var yen = Number(c);
+            
+            console.log("yen" + yen);
+            query=query-yen;
+            
+            
+            
+            window.location.href = '500yen.html?yen=' + query; // + (query - yen);
+        }
+        
+        var c=JSON.stringify(predict());
+        var d=parseInt(c);
+        var yen = d;
+        
+        document.write('<br \/>');
+        document.write(yen);
+        document.write('<br \/>');
+        document.write(typeof(c));
+        document.write('<br \/>');
+        document.write(typeof(yen));
 
     </script>
 </body>
