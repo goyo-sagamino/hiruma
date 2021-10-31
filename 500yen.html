@@ -105,6 +105,7 @@
 
         }
 
+        <!--
         function OK(){
             const prediction = model.predict(webcam.canvas);
 
@@ -118,11 +119,12 @@
             query = query - yen;
             window.location.href = '500yen.html?' + query;
         }
+        -->
 
 
         // run the webcam image through the image model
         async function predict() {
-            const prediction = model.predict(webcam.canvas);
+            const prediction = await model.predict(webcam.canvas);
 
             for (let i = 0; i < maxPredictions; i++) {
                 const classPrediction =
