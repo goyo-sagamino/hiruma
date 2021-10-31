@@ -106,14 +106,7 @@
         }
 
         function OK(){
-            prediction = predict()
-
-            for (let i = 0; i < maxPredictions; i++) {
-                yen = 0
-                if(prediction[i].probability.toFixed(2)>0.9){
-                    yen=identification_yen(i)
-                }
-            }
+            var yen = predict()
 
             query = query - yen;
             window.location.href = '500yen.html?' + query;
@@ -123,13 +116,19 @@
         // run the webcam image through the image model
         async function predict() {
             const prediction = await model.predict(webcam.canvas);
+            var yen = 0;
+            for (let i = 0; i < maxPredictions; i++) {
+                if(prediction[i].probability.toFixed(2)>0.9){
+                    yen = identification_yen(i);
+                }
+            }
 
             for (let i = 0; i < maxPredictions; i++) {
                 const classPrediction =
                     prediction[i].className + ": " + prediction[i].probability.toFixed(2);
                 labelContainer.childNodes[i].innerHTML = classPrediction;
             }
-            return prediction
+            return yen
         }
 
     </script>
