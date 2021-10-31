@@ -106,7 +106,7 @@
         }
 
         function OK(){
-            const prediction = await model.predict(webcam.canvas);
+            prediction = predict()
 
             for (let i = 0; i < maxPredictions; i++) {
                 yen = 0
@@ -129,6 +129,7 @@
                     prediction[i].className + ": " + prediction[i].probability.toFixed(2);
                 labelContainer.childNodes[i].innerHTML = classPrediction;
             }
+            return prediction
         }
 
     </script>
