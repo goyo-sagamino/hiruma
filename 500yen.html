@@ -109,11 +109,11 @@
             var yen = predict();
             
             console.log("yen" + yen);
-            window.location.href = '500yen.html?yen=' + (query - yen);
+            window.location.href = '500yen.html?yen=' + yen; // + (query - yen);
         }
 
 
-        // run the webcam image through the image model
+        // run the webcam image through the image model;
         async function predict() {
             const prediction = await model.predict(webcam.canvas);
             var yen = 0;
