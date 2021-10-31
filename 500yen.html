@@ -21,7 +21,6 @@
 
         var query = location.search;
         query = query.split("=")[1];//前のページで指定した目標金額
-        console.log(query);
 
         // More API functions here:
         // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
@@ -108,8 +107,11 @@
 
         function OK(){
             var yen = Number(predict());
-
+            
+            console.log(query);
             query = Number(query) - yen;
+            console.log(query);
+            
             window.location.href = '500yen.html?yen=' + query;
         }
 
