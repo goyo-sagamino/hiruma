@@ -109,7 +109,7 @@
         function OK(){
             var yen = Number(predict());
 
-            query = query - yen;
+            query = Number(query) - yen;
             window.location.href = '500yen.html?yen=' + query;
         }
 
