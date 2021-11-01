@@ -122,12 +122,40 @@
         // run the webcam image through the image model;
         async function predict() {
             const prediction = await model.predict(webcam.canvas);
-            var yen = 0;
+            var a=0
+            var b=0
             for (let i = 0; i < maxPredictions; i++) {
                 j=i+1
                 if(prediction[i].probability.toFixed(2)>0.9){
-                    yen = identification_yen(j);
-                    
+                    if (j/4<=1){
+                        a=100;
+                        if (j%4==1 || n%4==2){
+                            b=5*a;
+                        }
+                        else{
+                            b=1*a;
+                        }
+                    }
+
+                    else if (j/4>1 && j/4<=2){
+                        a=10;
+                        if (j%4==1 || j%4==2){
+                            b=5*a;
+                        }
+                        else{
+                            b=1*a;
+                        }
+                    }
+
+                    else if (j/4>2 && j/4<=3){
+                        a=1;
+                        if (j%4==1 || j%4==2){
+                            b=5*a;
+                        }
+                        else{
+                            b=1*a;
+                        }
+                    }
                 }
             }
             
